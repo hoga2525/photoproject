@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% comment %} ベーステンプレートを適用する {% endcomment %}
+
+{% comment %} ヘッダー所法のページタイトルを設定 {% endcomment %}
+{% block title %}Photo Gallery{% endblock %}
+
+    {% block contents %}
+
+    {% comment %} タイトルテンプレートの組み込み {% endcomment %}
+    {% include "photos_title.html" %}
+
+    {% comment %} 投稿一覧テンプレートの組み込み {% endcomment %}
+    {% include "photos_list.html" %}
+
+    {% comment %} ページネーションの組み込み {% endcomment %}
+    {% include "pagination.html" %}
+    
+    {% endblock %}

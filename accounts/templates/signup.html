@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% comment %} ヘッダー情報のタイトルを設定{% endcomment %}
+{% block title %}Sign up{% endblock %}
+
+    {% block contents %}
+    <hr>
+    <div class = "container">
+        {% comment %} 行の設置 {% endcomment %}
+        <div class = "row">
+        {% comment %} 列の左右に余白OFSET－２を入れる {% endcomment %}
+            <div class = "col offset-2">
+                <h3>サインアップ</h3>
+                {% comment %} サインアップのフォームを設置 {% endcomment %}
+                <form method = "post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                     <p>
+                        {% comment %}ラベルを出力{% endcomment %}
+                        {{ field.label_tag }}<br>
+                        {% comment %}<input>タグを出力{% endcomment %}
+                        {{ field }}
+                        {% comment %}help_textを出力{% endcomment %}
+                        {% if field.htlp_text %}
+                            <small style = "color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% comment %}エラー発生時のテキストerrorを出力{% endcomment %}
+                        {% for error in field.errors %}
+                            <p style = "color: red">{{ error }}</p>
+                        {% endfor %}
+                     </p>
+                     {% endfor %}
+                     <p style = "color:red">
+                        ※メールアドレスはパスワードをリセットする際に必要になりますので、
+                        登録お願いします。
+                     </p>
+                     {% comment %}SIGN UPボタンを出力{% endcomment %}
+                     <input type = "submit" value = "sign up">
+                    </form>
+                    {% comment %}トップページのリンクテキスト{% endcomment %}
+                    <br>
+                    <p><a href = "{% url 'photo:index' %}">
+                    登録をやめてトップページに戻る</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
